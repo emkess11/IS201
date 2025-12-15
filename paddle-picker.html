@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Pickleball Paddle Picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5fff5;
+        }
+        header {
+            background-color: #006666;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        a.back-link {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 1rem;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        .buttons {
+            margin-top: 1rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            border: none;
+            background-color: #006666;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button[disabled] {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        label {
+            display: block;
+            margin: 0.3rem 0;
+        }
+        input[type="radio"] {
+            margin-right: 0.4rem;
+        }
+        /* Paddle mock-up */
+        .result-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .paddle-preview {
+            width: 200px;
+            height: 320px;
+            position: relative;
+        }
+        .paddle-head {
+            width: 160px;
+            height: 220px;
+            border-radius: 80px;
+            margin: 0 auto;
+            border: 4px solid #333333;
+            background-color: #cccccc; /* default, will be changed by JS */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+        .paddle-handle {
+            width: 40px;
+            height: 90px;
+            background-color: #333333;
+            margin: 0 auto;
+            margin-top: -5px;
+            border-radius: 8px;
+        }
+        .specs {
+            flex: 1;
+            min-width: 220px;
+        }
+        .specs h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pickleball Paddle Picker</h1>
+        <p><a class="back-link" href="scratch.html">Back to Scratch Page</a></p>
+    </header>
+
+    <div class="container">
+        <p>Answer a few quick questions and see a custom paddle mock‑up based on your preferences.</p>
+
+        <!-- Step 1: Color -->
+        <div class="step active" id="step-1">
+            <h2>Step 1: Choose a main color</h2>
+            <label><input type="radio" name="color" value="blue" /> Blue</label>
+            <label><input type="radio" name="color" value="green" /> Green</label>
+            <label><input type="radio" name="color" value="red" /> Red</label>
+            <label><input type="radio" name="color" value="black" /> Black</label>
+            <div class="buttons">
+                <button id="next-1">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Price -->
+        <div class="step" id="step-2">
+            <h2>Step 2: Choose a price range</h2>
+            <label><input type="radio" name="price" value="budget" /> Budget (under $75)</label>
+            <label><input type="radio" name="price" value="mid" /> Mid‑range ($75–$150)</label>
+            <label><input type="radio" name="price" value="premium" /> Premium ($150+)</label>
+            <div class="buttons">
+                <button id="back-2">Back</button>
+                <button id="next-2">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Material -->
+        <div class="step" id="step-3">
+            <h2>Step 3: Choose a core material</h2>
+            <label><input type="radio" name="material" value="polymer" /> Polymer (quiet and soft feel)</label>
+            <label><input type="radio" name="material" value="nomex" /> Nomex (powerful, crisp feel)</label>
+            <label><input type="radio" name="material" value="aluminum" /> Aluminum (good control)</label>
+            <div class="buttons">
+                <button id="back-3">Back</button>
+                <button id="next-3">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Weight -->
+        <div class="step" id="step-4">
+            <h2>Step 4: Choose a weight</h2>
+            <label><input type="radio" name="weight" value="light" /> Light (7.0–7.5 oz) – quicker at the net</label>
+            <label><input type="radio" name="weight" value="medium" /> Medium (7.6–8.2 oz) – balanced</label>
+            <label><input type="radio" name="weight" value="heavy" /> Heavy (8.3+ oz) – more power</label>
+            <div class="buttons">
+                <button id="back-4">Back</button>
+                <button id="next-4">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 5: Grip size -->
+        <div class="step" id="step-5">
+            <h2>Step 5: Choose a grip size</h2>
+            <label><input type="radio" name="grip" value="small" /> Small (4.0&quot;–4.125&quot;)</label>
+            <label><input type="radio" name="grip" value="medium" /> Medium (4.25&quot;–4.375&quot;)</label>
+            <label><input type="radio" name="grip" value="large" /> Large (4.5&quot;)</label>
+            <div class="buttons">
+                <button id="back-5">Back</button>
+                <button id="next-5">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 6: Design style -->
+        <div class="step" id="step-6">
+            <h2>Step 6: Choose a design style</h2>
+            <label><input type="radio" name="design" value="minimal" /> Minimal &amp; clean</label>
+            <label><input type="radio" name="design" value="bold" /> Bold &amp; high‑contrast</label>
+            <label><input type="radio" name="design" value="pattern" /> Fun pattern</label>
+            <div class="buttons">
+                <button id="back-6">Back</button>
+                <button id="show-result">Show My Paddle</button>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div class="step" id="step-result">
+            <h2>Your Custom Paddle</h2>
+            <div class="result-layout">
+                <div class="paddle-preview">
+                    <div class="paddle-head" id="paddle-head">
+                        Your<br />Paddle
+                    </div>
+                    <div class="paddle-handle"></div>
+                </div>
+                <div class="specs">
+                    <h2>Selected Specs</h2>
+                    <ul>
+                        <li><strong>Color:</strong> <span id="spec-color"></span></li>
+                        <li><strong>Price range:</strong> <span id="spec-price"></span></li>
+                        <li><strong>Core material:</strong> <span id="spec-material"></span></li>
+                        <li><strong>Weight:</strong> <span id="spec-weight"></span></li>
+                        <li><strong>Grip size:</strong> <span id="spec-grip"></span></li>
+                        <li><strong>Design style:</strong> <span id="spec-design"></span></li>
+                    </ul>
+                    <button id="start-over">Start Over</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const steps = [
+            "step-1", "step-2", "step-3", "step-4", "step-5", "step-6", "step-result"
+        ];
+        let currentStepIndex = 0;
+
+        function showStep(index) {
+            steps.forEach((id, i) => {
+                document.getElementById(id).classList.toggle("active", i === index);
+            });
+            currentStepIndex = index;
+        }
+
+        function getSelectedValue(name) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            return selected ? selected.value : null;
+        }
+
+        function requireSelection(groupName) {
+            if (!getSelectedValue(groupName)) {
+                alert("Please select an option to continue.");
+                return false;
+            }
+            return true;
+        }
+
+        // Wiring buttons
+        document.getElementById("next-1").onclick = () => {
+            if (requireSelection("color")) showStep(1);
+        };
+        document.getElementById("next-2").onclick = () => {
+            if (requireSelection("price")) showStep(2);
+        };
+        document.getElementById("next-3").onclick = () => {
+            if (requireSelection("material")) showStep(3);
+        };
+        document.getElementById("next-4").onclick = () => {
+            if (requireSelection("weight")) showStep(4);
+        };
+        document.getElementById("next-5").onclick = () => {
+            if (requireSelection("grip")) showStep(5);
+        };
+
+        document.getElementById("back-2").onclick = () => showStep(0);
+        document.getElementById("back-3").onclick = () => showStep(1);
+        document.getElementById("back-4").onclick = () => showStep(2);
+        document.getElementById("back-5").onclick = () => showStep(3);
+        document.getElementById("back-6").onclick = () => showStep(4);
+
+        document.getElementById("show-result").onclick = () => {
+            if (!requireSelection("design")) return;
+
+            const selections = {
+                color: getSelectedValue("color"),
+                price: getSelectedValue("price"),
+                material: getSelectedValue("material"),
+                weight: getSelectedValue("weight"),
+                grip: getSelectedValue("grip"),
+                design: getSelectedValue("design")
+            };
+
+            // Update text specs
+            document.getElementById("spec-color").textContent = selections.color;
+            document.getElementById("spec-price").textContent = selections.price;
+            document.getElementById("spec-material").textContent = selections.material;
+            document.getElementById("spec-weight").textContent = selections.weight;
+            document.getElementById("spec-grip").textContent = selections.grip;
+            document.getElementById("spec-design").textContent = selections.design;
+
+            // Update paddle color and text based on choices
+            const head = document.getElementById("paddle-head");
+            const colorMap = {
+                blue: "#1e88e5",
+                green: "#2e7d32",
+                red: "#c62828",
+                black: "#333333"
+            };
+            head.style.backgroundColor = colorMap[selections.color] || "#cccccc";
+
+            let overlayText = "";
+            if (selections.design === "minimal") overlayText = "Clean\nDesign";
+            if (selections.design === "bold") overlayText = "Bold\nGraphics";
+            if (selections.design === "pattern") overlayText = "Pattern\nStyle";
+            head.textContent = overlayText;
+
+            showStep(6);
+        };
+
+        document.getElementById("start-over").onclick = () => {
+            // Clear selections
+            document.querySelectorAll("input[type=radio]").forEach(r => r.checked = false);
+            document.getElementById("paddle-head").textContent = "Your\nPaddle";
+            showStep(0);
+        };
+    </script>
+</body>
+</html>

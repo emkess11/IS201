@@ -1,0 +1,44 @@
+/* 1) Overall scratch page styling */
+body.scratch-page {
+    background-color: #e6ffe6;
+    text-align: center;
+    font-family: "Georgia", "Times New Roman", serif; /* font family */
+    color: #222222;                                   /* font color */
+}
+
+/* 2) Center main content block */
+.main-content {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 20px;
+}
+
+/* 3) Top section holding the picture */
+.top-image {
+    margin-bottom: 20px;
+}
+
+/* 4) Content box around the rules list */
+.rules-box {
+    border: 2px solid #3b7a57;
+    background-color: #f8fff8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* 5) Styling headings */
+.scratch-page h1 {
+    color: #005500;                /* font color */
+    font-family: "Georgia", serif; /* font family */
+}
+
+.scratch-page h2 {
+    color: #006666;
+}
+
+/* 6) List alignment so it looks normal */
+body.scratch-page ol,
+body.scratch-page ul {
+    text-align: left;
+    margin-left: 2rem;
+}
